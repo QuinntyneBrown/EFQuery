@@ -32,12 +32,12 @@ namespace EFQuery.Api.Queries
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
 
-                var threshold = DateTime.UtcNow.AddDays(0).Date;
+                var threshold = DateTime.UtcNow.AddDays(-10).Date;
 
-                var query = from order in _context.Orders
+                var query = (from order in _context.Orders
                             where order.CreatedDate >= threshold
                             join customer in _context.Customers on order.CustomerId equals customer.CustomerId
-                            select customer;
+                            select customer).Distinct();
 
                 return new Response()
                 {

@@ -1,17 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{32674C09-CC5B-44D2-83EF-A17CAFF6966C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFQuery.Api", "src\EFQuery.Api\EFQuery.Api.csproj", "{09810DC9-51A2-4459-806E-6D559F06853E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFQuery.Api", "src\EFQuery.Api\EFQuery.Api.csproj", "{09810DC9-51A2-4459-806E-6D559F06853E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6DA1A81A-52CE-4C5A-A23F-44540CD05FD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFQuery.FunctionalTests", "test\EFQuery.FunctionalTests\EFQuery.FunctionalTests.csproj", "{6623881F-A2C6-4B13-A702-7B75DAFF78D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFQuery.FunctionalTests", "test\EFQuery.FunctionalTests\EFQuery.FunctionalTests.csproj", "{6623881F-A2C6-4B13-A702-7B75DAFF78D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFQuery.Testing", "test\EFQuery.Testing\EFQuery.Testing.csproj", "{0A103A72-05AC-4197-8781-66A2732C28DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFQuery.Testing", "test\EFQuery.Testing\EFQuery.Testing.csproj", "{0A103A72-05AC-4197-8781-66A2732C28DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1A0E1F12-45B6-4B7E-88CB-D1324D4C076F}"
+	ProjectSection(SolutionItems) = preProject
+		cliSettings.json = cliSettings.json
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{09810DC9-51A2-4459-806E-6D559F06853E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -63,9 +66,15 @@ Global
 		{0A103A72-05AC-4197-8781-66A2732C28DA}.Release|x86.ActiveCfg = Release|Any CPU
 		{0A103A72-05AC-4197-8781-66A2732C28DA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{09810DC9-51A2-4459-806E-6D559F06853E} = {32674C09-CC5B-44D2-83EF-A17CAFF6966C}
 		{6623881F-A2C6-4B13-A702-7B75DAFF78D4} = {6DA1A81A-52CE-4C5A-A23F-44540CD05FD6}
 		{0A103A72-05AC-4197-8781-66A2732C28DA} = {6DA1A81A-52CE-4C5A-A23F-44540CD05FD6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D99DA39-7933-433E-9629-C87267FA381A}
 	EndGlobalSection
 EndGlobal
