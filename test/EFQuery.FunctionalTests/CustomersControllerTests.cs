@@ -28,7 +28,7 @@ namespace EFQuery.FunctionalTests
             Assert.Single(response.Customers);
         }
 
-  
+
         internal static class Endpoints
         {
             public static class Get

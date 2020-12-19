@@ -10,8 +10,9 @@ namespace EFQuery.Api.Queries
 {
     public class GetCustomersWithRecentOrder
     {
-        public class Request : IRequest<Response> {  
-        
+        public class Request : IRequest<Response>
+        {
+
         }
 
         public class Response
@@ -23,21 +24,24 @@ namespace EFQuery.Api.Queries
         {
             private readonly IEFQueryDbContext _context;
 
-            public Handler(IEFQueryDbContext context){
+            public Handler(IEFQueryDbContext context)
+            {
                 _context = context;
             }
 
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            {
 
                 var threshold = DateTime.UtcNow.AddDays(0).Date;
 
                 var query = from order in _context.Orders
-                             where order.CreatedDate >= threshold
-                             join customer in _context.Customers on order.CustomerId equals customer.CustomerId
-                             select customer;
+                            where order.CreatedDate >= threshold
+                            join customer in _context.Customers on order.CustomerId equals customer.CustomerId
+                            select customer;
 
-			    return new Response() { 
-                    Customers = query.Select(x => new CustomerDto(x.CustomerId,x.FirstName,x.LastName)).ToList()
+                return new Response()
+                {
+                    Customers = query.Select(x => new CustomerDto(x.CustomerId, x.FirstName, x.LastName)).ToList()
                 };
             }
         }

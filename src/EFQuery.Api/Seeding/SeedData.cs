@@ -12,7 +12,7 @@ namespace EFQuery.Core.Seeding
         {
             var quinntyne = context.Customers.SingleOrDefault(x => x.Email == "quinntynebrown@gmail.com");
 
-            if(quinntyne == null)
+            if (quinntyne == null)
             {
                 quinntyne = new Customer()
                 {

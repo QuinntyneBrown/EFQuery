@@ -20,7 +20,7 @@ namespace EFQuery.Testing
                 using (var scope = serviceProvider.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
-                    
+
                     Context = scopedServices.GetRequiredService<EFQueryDbContext>();
 
                     Context.Database.EnsureCreated();

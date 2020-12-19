@@ -21,6 +21,6 @@ namespace EFQuery.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetCustomersWithRecentOrder.Response), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetCustomersWithRecentOrder.Response>> Get()
-            => await _mediator.Send(new GetCustomersWithRecentOrder.Request());           
+            => await _mediator.Send(new GetCustomersWithRecentOrder.Request());
     }
 }
