@@ -10,10 +10,7 @@ namespace EFQuery.Api.Queries
 {
     public class GetCustomersWithRecentOrder
     {
-        public class Request : IRequest<Response>
-        {
-
-        }
+        public class Request : IRequest<Response> { }
 
         public class Response
         {
@@ -41,7 +38,7 @@ namespace EFQuery.Api.Queries
 
                 return new Response()
                 {
-                    Customers = query.Select(x => new CustomerDto(x.CustomerId, x.FirstName, x.LastName)).ToList()
+                    Customers = query.Select(x => x.ToDto()).ToList()
                 };
             }
         }

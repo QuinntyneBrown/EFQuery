@@ -10,6 +10,22 @@ namespace EFQuery.Core.Seeding
     {
         public static void Seed(EFQueryDbContext context, IConfiguration configuration)
         {
+            var olivia = context.Customers.SingleOrDefault(x => x.Email == "oliviabrown@gmail.com");
+
+            if (olivia == null)
+            {
+                olivia = new Customer()
+                {
+                    FirstName = "Olivia",
+                    LastName = "Brown",
+                    Email = "oliviabrown@gmail.com"
+                };
+
+                context.Customers.Add(olivia);
+
+                context.SaveChanges();
+            }
+
             var quinntyne = context.Customers.SingleOrDefault(x => x.Email == "quinntynebrown@gmail.com");
 
             if (quinntyne == null)

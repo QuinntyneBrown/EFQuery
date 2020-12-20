@@ -1,6 +1,5 @@
 using EFQuery.Api.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
@@ -19,8 +18,15 @@ namespace EFQuery.Api.Controllers
         [HttpGet(Name = "GetCustomersRoute")]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(GetCustomers.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetCustomers.Response>> Get()
+            => await _mediator.Send(new GetCustomers.Request());
+
+        [HttpGet("active",Name = "GetCustomersWithRecentOrderRoute")]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetCustomersWithRecentOrder.Response), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<GetCustomersWithRecentOrder.Response>> Get()
+        public async Task<ActionResult<GetCustomersWithRecentOrder.Response>> GetActive()
             => await _mediator.Send(new GetCustomersWithRecentOrder.Request());
     }
 }

@@ -34,6 +34,7 @@ namespace EFQuery.FunctionalTests
             public static class Get
             {
                 public static string Customers = "api/customers";
+                public static string ActiveCustomers = "api/customers/active";
             }
         }
     }
