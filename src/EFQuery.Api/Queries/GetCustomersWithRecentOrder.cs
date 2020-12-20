@@ -29,7 +29,7 @@ namespace EFQuery.Api.Queries
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
 
-                var threshold = DateTime.UtcNow.AddDays(-10).Date;
+                var threshold = DateTime.UtcNow.AddDays(-1).Date;
 
                 var query = (from order in _context.Orders
                             where order.CreatedDate >= threshold

@@ -1,6 +1,6 @@
 # EF Query
 
-Creating a EF query (using the Query syntax) to display the customers who have a recent order
+Creating an EF query (using the Query syntax) to display the customers who have a recent order and an EF query for customers with orders (without using navigation properties).
 
 ## How to run locally
 

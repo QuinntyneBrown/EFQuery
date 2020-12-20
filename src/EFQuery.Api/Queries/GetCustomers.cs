@@ -29,7 +29,7 @@ namespace EFQuery.Api.Queries
                 var customers = (from customer in _context.Customers
                             join order in _context.Orders on customer.CustomerId equals order.CustomerId into gj
                             from subOrder in gj.DefaultIfEmpty()
-                            select new Tuple<Customer,Order>(customer, subOrder)).Aggregate(new List<CustomerDto>(), Reduce); ;
+                            select new Tuple<Customer,Order>(customer, subOrder)).Aggregate(new List<CustomerDto>(), Reduce);
 
                 List<CustomerDto> Reduce(List<CustomerDto> customers, Tuple<Customer,Order> data)
                 {
