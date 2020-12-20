@@ -1,7 +1,6 @@
 using EFQuery.Api.Data;
-using EFQuery.Api.Models;
 using MediatR;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -23,33 +22,16 @@ namespace EFQuery.Api.Queries
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
 
-                var customers = (from customer in _context.Customers
-                            join order in _context.Orders on customer.CustomerId equals order.CustomerId into gj
-                            from maybeOrder in gj.DefaultIfEmpty()
-                            select new Tuple<Customer, Order>(customer, maybeOrder)).Aggregate(new List<CustomerDto>(), Reduce);
+                _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
-                List<CustomerDto> Reduce(List<CustomerDto> customers, Tuple<Customer, Order> data)
-                {
-                    var customer = customers.SingleOrDefault(x => x.CustomerId == data.Item1.CustomerId);
+                var customers = await (from customer in _context.Customers
 
-                    if (customer == null)
-                    {
-                        customer = data.Item1.ToDto();
+                                 let orders = _context.Orders.Where(x => x.CustomerId == customer.CustomerId).Select(x => x.ToDto()).ToList()
 
-                        customers.Add(customer);
-                    }
-
-                    if (data.Item2 != null)
-                    {
-                        customer.Orders.Add(data.Item2.ToDto());
-                    }
-
-                    return customers;
-                }
+                                 select new CustomerDto(customer.CustomerId, customer.Firstname, customer.Lastname, orders)).ToListAsync();
 
                 return new Response(customers);
             }
         }
     }
-
 }

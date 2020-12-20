@@ -36,11 +36,9 @@ namespace EFQuery.Api
                 options.CustomSchemaIds(x => x.FullName);
             });
 
-
             services.AddMediatR(typeof(GetCustomersWithRecentOrder));
 
             services.AddTransient<IEFQueryDbContext, EFQueryDbContext>();
-
 
             services.AddDbContext<EFQueryDbContext>(options =>
             {

@@ -1,5 +1,6 @@
 using EFQuery.Api.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 
 namespace EFQuery.Api.Data

@@ -16,8 +16,8 @@ namespace EFQuery.Core.Seeding
             {
                 olivia = new Customer()
                 {
-                    FirstName = "Olivia",
-                    LastName = "Brown",
+                    Firstname = "Olivia",
+                    Lastname = "Brown",
                     Email = "oliviabrown@gmail.com"
                 };
 
@@ -32,8 +32,8 @@ namespace EFQuery.Core.Seeding
             {
                 quinntyne = new Customer()
                 {
-                    FirstName = "Quinntyne",
-                    LastName = "Brown",
+                    Firstname = "Quinntyne",
+                    Lastname = "Brown",
                     Email = "quinntynebrown@gmail.com"
                 };
 
@@ -48,8 +48,8 @@ namespace EFQuery.Core.Seeding
             {
                 vanessa = new Customer()
                 {
-                    FirstName = "Vanessa",
-                    LastName = "Brown",
+                    Firstname = "Vanessa",
+                    Lastname = "Brown",
                     Email = "vanessabrown@gmail.com"
                 };
 

@@ -12,7 +12,7 @@ namespace EFQuery.Api
     {
         public static CustomerDto ToDto(this Customer customer)
         {
-            return new CustomerDto(customer.CustomerId, customer.FirstName, customer.LastName, new List<OrderDto>());
+            return new CustomerDto(customer.CustomerId, customer.Firstname, customer.Lastname, new List<OrderDto>());
         }
     }
 

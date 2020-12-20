@@ -1,5 +1,6 @@
 using EFQuery.Api.Data;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,17 +29,19 @@ namespace EFQuery.Api.Queries
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
+                _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
                 var threshold = DateTime.UtcNow.AddDays(-1).Date;
 
-                var query = (from order in _context.Orders
-                            where order.CreatedDate >= threshold
-                            join customer in _context.Customers on order.CustomerId equals customer.CustomerId
-                            select customer).Distinct();
+                var query = from customer in _context.Customers
+                                                       
+                            where _context.Orders.Where(order => order.CreatedDate >= threshold && order.CustomerId == customer.CustomerId).Any()
+
+                            select customer;
 
                 return new Response()
                 {
-                    Customers = query.Select(x => x.ToDto()).ToList()
+                    Customers = await query.Select(x => x.ToDto()).ToListAsync()
                 };
             }
         }
