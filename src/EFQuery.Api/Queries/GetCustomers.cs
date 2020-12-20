@@ -11,12 +11,9 @@ namespace EFQuery.Api.Queries
 {
     public class GetCustomers
     {
-        public class Request : IRequest<Response> {  }
+        public record Request : IRequest<Response>;
 
-        public class Response
-        {
-            public List<CustomerDto> Customers { get; set; }
-        }
+        public record Response(List<CustomerDto> Customers);
 
         public class Handler : IRequestHandler<Request, Response>
         {
@@ -28,10 +25,10 @@ namespace EFQuery.Api.Queries
 
                 var customers = (from customer in _context.Customers
                             join order in _context.Orders on customer.CustomerId equals order.CustomerId into gj
-                            from subOrder in gj.DefaultIfEmpty()
-                            select new Tuple<Customer,Order>(customer, subOrder)).Aggregate(new List<CustomerDto>(), Reduce);
+                            from maybeOrder in gj.DefaultIfEmpty()
+                            select new Tuple<Customer, Order>(customer, maybeOrder)).Aggregate(new List<CustomerDto>(), Reduce);
 
-                List<CustomerDto> Reduce(List<CustomerDto> customers, Tuple<Customer,Order> data)
+                List<CustomerDto> Reduce(List<CustomerDto> customers, Tuple<Customer, Order> data)
                 {
                     var customer = customers.SingleOrDefault(x => x.CustomerId == data.Item1.CustomerId);
 
@@ -50,10 +47,7 @@ namespace EFQuery.Api.Queries
                     return customers;
                 }
 
-                return new Response
-                {
-                    Customers = customers
-                };
+                return new Response(customers);
             }
         }
     }
