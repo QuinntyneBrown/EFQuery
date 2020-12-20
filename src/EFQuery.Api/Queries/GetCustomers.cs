@@ -37,14 +37,14 @@ namespace EFQuery.Api.Queries
 
                     if (customer == null)
                     {
-                        customer = new CustomerDto(data.Item1.CustomerId, data.Item1.FirstName, data.Item1.LastName, new List<OrderDto>());
+                        customer = data.Item1.ToDto();
 
                         customers.Add(customer);
                     }
 
                     if (data.Item2 != null)
                     {
-                        customer.Orders.Add(new OrderDto(data.Item2.OrderId, data.Item2.CustomerId, data.Item2.Total, data.Item2.CreatedDate));
+                        customer.Orders.Add(data.Item2.ToDto());
                     }
 
                     return customers;
@@ -58,11 +58,4 @@ namespace EFQuery.Api.Queries
         }
     }
 
-    public static class CustomerExtensions
-    {
-        public static CustomerDto ToDto(this Customer customer)
-        {
-            return new CustomerDto(customer.CustomerId, customer.FirstName, customer.LastName, new List<OrderDto>());
-        }
-    }
 }
