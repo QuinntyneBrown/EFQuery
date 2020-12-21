@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.QueryTrackingBehavior;
 
 namespace EFQuery.Api.Queries
 {
@@ -22,13 +23,13 @@ namespace EFQuery.Api.Queries
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
 
-                _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                _context.ChangeTracker.QueryTrackingBehavior = NoTracking;
 
                 var customers = await (from customer in _context.Customers
 
                                  let orders = _context.Orders.Where(x => x.CustomerId == customer.CustomerId).Select(x => x.ToDto()).ToList()
 
-                                 select new CustomerDto(customer.CustomerId, customer.Firstname, customer.Lastname, orders)).ToListAsync();
+                                 select new CustomerDto(customer.CustomerId, customer.Firstname, customer.Lastname, orders)).ToListAsync(cancellationToken);
 
                 return new Response(customers);
             }

@@ -41,7 +41,7 @@ namespace EFQuery.Api.Queries
 
                 return new Response()
                 {
-                    Customers = await query.Select(x => x.ToDto()).ToListAsync()
+                    Customers = await query.Select(x => x.ToDto()).ToListAsync(cancellationToken)
                 };
             }
         }
