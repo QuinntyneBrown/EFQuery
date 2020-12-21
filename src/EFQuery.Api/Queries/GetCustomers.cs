@@ -31,7 +31,7 @@ namespace EFQuery.Api.Queries
 
                                  select new CustomerDto(customer.CustomerId, customer.Firstname, customer.Lastname, orders)).ToListAsync(cancellationToken);
 
-                return new Response(customers);
+                return new (customers);
             }
         }
     }

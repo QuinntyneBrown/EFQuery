@@ -8,19 +8,12 @@ namespace EFQuery.Api
 
     public record OrderDto(Guid OrderId, Guid CustomerId, decimal Total, DateTime CreatedDate);
 
-    public static class CustomerExtensions
+    public static class ModelExtensions
     {
         public static CustomerDto ToDto(this Customer customer)
-        {
-            return new CustomerDto(customer.CustomerId, customer.Firstname, customer.Lastname, new List<OrderDto>());
-        }
-    }
+            => new(customer.CustomerId, customer.Firstname, customer.Lastname, new List<OrderDto>());
 
-    public static class OrderExtensions
-    {
         public static OrderDto ToDto(this Order order)
-        {
-            return new OrderDto(order.OrderId, order.CustomerId, order.Total, order.CreatedDate);
-        }
+            => new(order.OrderId, order.CustomerId, order.Total, order.CreatedDate);
     }
 }

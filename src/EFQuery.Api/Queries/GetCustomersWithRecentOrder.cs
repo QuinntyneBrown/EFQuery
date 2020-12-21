@@ -1,22 +1,19 @@
 using EFQuery.Api.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.DateTime;
 
 namespace EFQuery.Api.Queries
 {
     public class GetCustomersWithRecentOrder
     {
-        public class Request : IRequest<Response> { }
+        public record Request : IRequest<Response>;
 
-        public class Response
-        {
-            public List<CustomerDto> Customers { get; set; }
-        }
+        public record Response(List<CustomerDto> Customers);
 
         public class Handler : IRequestHandler<Request, Response>
         {
@@ -31,7 +28,7 @@ namespace EFQuery.Api.Queries
             {
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
-                var threshold = DateTime.UtcNow.AddDays(-1).Date;
+                var threshold = UtcNow.AddDays(-1).Date;
 
                 var query = from customer in _context.Customers
                                                        
@@ -39,10 +36,7 @@ namespace EFQuery.Api.Queries
 
                             select customer;
 
-                return new Response()
-                {
-                    Customers = await query.Select(x => x.ToDto()).ToListAsync(cancellationToken)
-                };
+                return new(await query.Select(x => x.ToDto()).ToListAsync(cancellationToken));
             }
         }
     }
